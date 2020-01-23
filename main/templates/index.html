@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Books and Authors</title>
+</head>
+
+<body>
+    <h1>Hello, {{ user.first_name }} {{user.last_name}}</h1>
+    <h3><a href="/logout">Logout</a></h3>
+    <h1>Add a Book</h1>
+    <form action="/process_book" method="POST">
+        {%csrf_token%}
+        <div>
+            <label for="title">Title</label>
+            <input type="text" name="title">
+        </div>
+        <div>
+            <label for="desc">Description</label>
+            <textarea name="desc" cols="30" rows="10"></textarea>
+        </div>
+        <button>Add</button>
+    </form>
+
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            {% for book in books%}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td> <a href="/books/{{book.id}}">View</a></td>
+            </tr>
+
+            {% endfor %}
+
+
+        </tbody>
+    </table>
+</body>
+
+</html>
